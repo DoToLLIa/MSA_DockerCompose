@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  schedulerService:
+    image: dotollia/msa_schedulerservice:0.1
+    container_name: schedulerService
+    depends_on:
+      - bankAccountGenerator
+    networks:
+      my_net:
+        aliases:
+          - schedulerService
+
+  bankAccountGenerator:
+    image: dotollia/msa_bankaccountgenerator:0.1
+    container_name: bankAccountGenerator
+    ports:
+      - "8085:8080"
+    networks:
+      my_net:
+        ipv4_address: 10.20.30.10
+        aliases:
+          - bankAccountGenerator
+
+networks:
+  my_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: "10.20.30.0/24"
