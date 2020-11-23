@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   schedulerService:
-    image: dotollia/msa_schedulerservice:0.1
+    image: dotollia/msa_schedulerservice:0.2
     container_name: schedulerService
     depends_on:
       - bankAccountGenerator
@@ -11,7 +11,7 @@ services:
           - schedulerService
 
   bankAccountGenerator:
-    image: dotollia/msa_bankaccountgenerator:0.1
+    image: dotollia/msa_bankaccountgenerator:0.2
     container_name: bankAccountGenerator
     ports:
       - "8085:8080"
