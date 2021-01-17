@@ -1,10 +1,10 @@
 version: "3.8"
 services:
   schedulerService:
-    image: dotollia/msa_schedulerservice:0.2
+    image: dotollia/msa_schedulerservice:0.3
     container_name: schedulerService
     depends_on:
-      - bankAccountGenerator
+      - kafkaProducer
     networks:
       my_net:
         aliases:
@@ -21,6 +21,20 @@ services:
         aliases:
           - bankAccountGenerator
 
+  kafkaProducer:
+    image: dotollia/msa_kafkaproducer:0.3
+    container_name: kafkaProducer
+    depends_on:
+      - kafka
+      - bankAccountGenerator
+    ports:
+      - "8081:8080"
+    networks:
+      my_net:
+        ipv4_address: 10.20.30.11
+        aliases:
+          - kafkaProducer
+
   zookeeper:
     image: wurstmeister/zookeeper
     container_name: zookeeper
@@ -30,6 +44,8 @@ services:
   kafka:
     image: wurstmeister/kafka
     container_name: kafka
+    depends_on:
+      - zookeeper
     ports:
       - "9092:9092"
     environment:
