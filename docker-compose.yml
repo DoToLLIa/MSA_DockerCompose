@@ -35,6 +35,17 @@ services:
         aliases:
           - kafkaProducer
 
+  kafkaConsumer:
+    image: dotollia/msa_kafkaconsumer:0.3
+    container_name: kafkaConsumer
+    ports:
+      - "8082:8080"
+    networks:
+      my_net:
+        ipv4_address: 10.20.30.12
+        aliases:
+          - kafkaConsumer
+
   zookeeper:
     image: wurstmeister/zookeeper
     container_name: zookeeper
