@@ -17,7 +17,7 @@ services:
       - "8085:8080"
     networks:
       my_net:
-        ipv4_address: 10.20.30.10
+        ipv4_address: 10.20.30.15
         aliases:
           - bankAccountGenerator
 
@@ -51,6 +51,11 @@ services:
     container_name: zookeeper
     ports:
       - "2181:2181"
+    networks:
+      my_net:
+        ipv4_address: 10.20.30.81
+        aliases:
+          - zookeeper
 
   kafka:
     image: wurstmeister/kafka
@@ -64,6 +69,11 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      my_net:
+        ipv4_address: 10.20.30.92
+        aliases:
+          - kafka
 
 networks:
   my_net:
