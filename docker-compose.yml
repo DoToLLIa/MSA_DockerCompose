@@ -5,6 +5,8 @@ services:
     container_name: schedulerService
     depends_on:
       - kafkaProducer
+    environment:
+      INVOKE_URL: 10.20.30.11:8080
     networks:
       my_net:
         aliases:
