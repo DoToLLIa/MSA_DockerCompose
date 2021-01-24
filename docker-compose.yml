@@ -29,6 +29,8 @@ services:
     depends_on:
       - kafka
       - bankAccountGenerator
+    environment:
+      BANK_ACCOUNT_GENERATOR_URL: bankAccountGenerator:8080
     ports:
       - "8081:8080"
     networks:
